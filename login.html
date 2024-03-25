@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-input {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <tr>
+        <td>
+            <img width="100" src="gambar/coin.png" />
+        </td>
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="return login()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="login-input" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="login-input" required>
+        <input type="submit" value="Login" class="login-button">
+    </form>
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (!localStorage.getItem(username)) {
+                alert("Username not found. Please register an account.");
+                return false; 
+            }
+
+            var storedPassword = localStorage.getItem(username);
+          
+            if (password !== storedPassword) {
+                alert("Incorrect password. Please try again.");
+                return false; 
+            }
+            localStorage.setItem("active_user", username);
+            window.location.href = "main.html";
+            return false; 
+        }
+    </script>
+</body>
+</html>
